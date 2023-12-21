@@ -6,7 +6,7 @@ function ctrlDoLogin($request, $response, $container){
 
     $pass = $request->get(INPUT_POST, "pass");
 
-    if ($pass == '1234') {
+    if ($pass == '12345') {
     $_SESSION['logged'] = true;
     $response->redirect("location: index.php?r=consulta");
     } else {
