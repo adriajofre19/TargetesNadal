@@ -1,19 +1,15 @@
 <?php
 
-function ctrlConsulta($request, $response, $container){
+function ctrlAdminPanel($request, $response, $container){
 
     $taskModel = $container->users();
     
     $users = $taskModel->getAllUsers();
 
     $response->set("users", $users);
-
-    $response->setTemplate("consulta.php");
     
 
-    return $response;
+    $response->setTemplate("adminpanel.php");
+
+    return $response;    
 }
-
-
-
-

@@ -41,13 +41,15 @@ class Users {
         }
     }
 
-    public function addUser($nom,$cognoms,$data_naix,$adreca) {
-        $stm = $this->sql->prepare('insert into users (nom, cognoms, data_naix, adreca) values (:nom, :cognoms, :data_naix, :adreca);');
+    public function addUser($nom,$cognoms,$data_naix,$adreca, $grup, $token) {
+        $stm = $this->sql->prepare('insert into users (nom, cognoms, data_naix, adreca, grup, token) values (:nom, :cognoms, :data_naix, :adreca, :grup, :token);');
         $result = $stm->execute([
             ':nom' => $nom, 
             ':cognoms' => $cognoms, 
             ':data_naix' => $data_naix,
-            ':adreca' => $adreca
+            ':adreca' => $adreca,
+            ':grup' => $grup,
+            ':token' => $token
         ]);
     }
 
@@ -63,6 +65,14 @@ class Users {
         $stm = $this->sql->prepare('select * from users;');
         $stm->execute();
         $result = $stm->fetchAll(\PDO::FETCH_ASSOC);
+        
+        return $result;
+    }
+
+    public function getUserByToken($token){
+        $stm = $this->sql->prepare('select * from users where token=:token;');
+        $stm->execute([':token' => $token]);
+        $result = $stm->fetch(\PDO::FETCH_ASSOC);
         
         return $result;
     }

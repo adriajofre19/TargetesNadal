@@ -4,14 +4,14 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
 include "../src/config.php";
 include "../src/controllers/index.php";
-include "../src/controllers/login.php";
 include "../src/controllers/register.php";
-include "../src/controllers/doLogin.php";
 include "../src/controllers/doRegister.php";
 include "../src/controllers/doLogout.php";
 include "../src/controllers/confirm.php";
 include "../src/controllers/consulta.php";
-include "../src/controllers/validar_codi.php";
+include "../src/controllers/validate_token.php";
+include "../src/controllers/adminpanel.php";
+
 
 
 
@@ -35,16 +35,8 @@ if($r == "") {
     $response = CtrlIndex($request, $response, $container);
   $response->response();
 
-  } elseif($r == "login") {
-  $response = ctrlLogin($request, $response, $container);
-  $response->response();
-
-} elseif($r == "index") {
+  }  elseif($r == "index") {
   $response = CtrlIndex($request, $response, $container);
-  $response->response();
-
-} elseif($r == "dologin") {
-  $response = ctrlDoLogin($request, $response, $container);
   $response->response();
 
 } elseif($r == "register") {
@@ -67,9 +59,12 @@ if($r == "") {
    ctrlValidar($request, $response, $container);
   $response->response();
 
-}
+} elseif($r == "adminpanel") {
+  $response = ctrlAdminPanel($request, $response, $container);
+  $response->response();
+} 
  else {
-     $response = ctrlLogin($request, $response, $container);
-       $response->response();
+     $response = CtrlIndex($request, $response, $container);
+  $response->response();
  } 
 
